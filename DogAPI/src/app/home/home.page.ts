@@ -11,8 +11,10 @@ import { catchError, retry } from 'rxjs/operators';
 export class HomePage {
   
   constructor(private http: HttpClient) {
+    this.auswahl = "random";
     	this.initAllBreeds();
   }
+  auswahl;
   baseURL: string = "https://dog.ceo/api/";
   loading: boolean = false;
   errorMessage;
@@ -20,6 +22,11 @@ export class HomePage {
   allbreednames = [];
   place;
   specific_breed: boolean = false;
+  random: boolean = false;
+  specific: boolean = false;
+  path;
+  breedname;
+  breed;
 
   initAllBreeds(){
     this.loading;
@@ -44,6 +51,53 @@ export class HomePage {
           this.loading = false; 
         })
   }
+
+  getDogImage(){
+    this.loading;
+    this.loading = true;
+    this.errorMessage = "";
+    if(this.specific_breed){
+      this.getSpecificDog(this.place)
+      .subscribe(
+        (response) => {                           //next() callback
+          console.log('response received')
+          this.breedname= this.place;
+          console.log(response);
+          this.path = response.message;
+        },
+        (error) => {                              //error() callback
+          console.error('Request failed with error')
+          this.errorMessage = error;
+          this.loading = false;
+        },
+        () => {                                   //complete() callback
+          console.error('Request completed')      //This is actually not needed 
+          this.loading = false; 
+        })
+    }else if(!this.specific_breed){
+      this.getAllDogs()
+      .subscribe(
+        (response) => {                           //next() callback
+          console.log(response);
+          var url = response.message;
+          var parts = url.split('/');
+          console.log(parts[4]);
+          this.breedname= parts[4];
+          this.breed = this.breedname;
+          this.path = response.message;
+        },
+        (error) => {                              //error() callback
+          console.error('Request failed with error')
+          this.errorMessage = error;
+          this.loading = false;
+        },
+        () => {                                   //complete() callback
+          console.error('Request completed')      //This is actually not needed 
+          this.loading = false; 
+        })
+    }
+
+  }
   
 
   getAllBreeds(): Observable<any>{
@@ -54,7 +108,7 @@ export class HomePage {
   getSpecificDog(breed: string): Observable<any> {
     return this.http.get(this.baseURL + 'breed/' + breed + '/images/random')
   }
-  getallDogs(): Observable<any> {
+  getAllDogs(): Observable<any> {
     return this.http.get(this.baseURL + 'breeds/image/random')
   }
 
@@ -68,6 +122,16 @@ export class HomePage {
 }
 breedselected(){
   console.log(this.place);
+}
+
+segmentChanged(ev: any){
+  if (ev.detail.value == "specific"){
+    this.specific_breed= true;
+  }else if (ev.detail.value =="random"){
+    this.specific_breed= false;
+  }else{
+    console.log("irgendwas ging schief beim segmentchanged");
+  }
 }
 }
  

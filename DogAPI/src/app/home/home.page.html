@@ -20,26 +20,34 @@
 
 <ion-content [fullscreen]="true">
   <ion-item>
-    <ion-segment (ionChange)="segmentChanged($event)">
-      <ion-segment-button value="friends">
+    <ion-segment [(ngModel)]="auswahl" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="random">
         <ion-label>Random</ion-label>
       </ion-segment-button>
-      <ion-segment-button value="enemies">
+      <ion-segment-button value="specific">
         <ion-label>Specific</ion-label>
       </ion-segment-button>
     </ion-segment>
+  </ion-item>
+  <ion-item  >
+
     <ion-label>Hunderasse</ion-label>
-    <ion-select *ngIf="specific_breed" [(ngModel)]="place" (ionChange)="breedselected()">
+
+    <ion-select *ngIf="specific_breed; else templateName" [(ngModel)]="place" (ionChange)="breedselected()">
       <ion-select-option *ngFor="let breed of allbreednames" >{{breed}}</ion-select-option>
     </ion-select>
+    <ng-template #templateName>
+      <ion-label>{{breedname}}</ion-label>
+  </ng-template>
   </ion-item>
   <ion-item>
-    <ion-button expand="block" (click)="berechnenClicked()">Berechnen!</ion-button>
+    <ion-button expand="block" (click)=" getDogImage()">New Dog!</ion-button>
   </ion-item>
 
-  <div id="container">
-    <ion-img src="{{img}}">
-
-    </ion-img>
+  <div class="box large">
+    <img [src]='path'>
   </div>
+<ion-item>
+  <ion-label>Hunderasse</ion-label>
+</ion-item>
 </ion-content>

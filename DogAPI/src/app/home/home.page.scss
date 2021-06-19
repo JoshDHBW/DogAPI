@@ -8,11 +8,38 @@
   transform: translateY(-50%);
 }
 
+.bounding-box {
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
 #container strong {
   font-size: 20px;
   line-height: 26px;
 }
 
+img{
+  max-width: auto;
+  max-height:390px;
+  display: block; /* remove extra space below image */
+  margin: auto;
+}
+.box{
+  width: 100%;   
+  border: 5px solid black;
+  text-align: center;
+  margin: auto;
+  max-width:100%;
+}    
+.box.large{
+  height: auto;
+  max-height:400px;
+  width: max-content;
+  max-width:100%;
+}
+.box.small{
+  height: 100px;
+}
 #container p {
   font-size: 16px;
   line-height: 22px;
