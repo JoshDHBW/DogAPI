@@ -40,9 +40,24 @@
       <ion-label>{{breedname}}</ion-label>
   </ng-template>
   </ion-item>
-  <ion-item>
-    <ion-button expand="block" (click)=" getDogImage()">New Dog!</ion-button>
-  </ion-item>
+  <ion-row>
+    <ion-col size="4">
+      <ion-item>
+        <ion-button expand="block" (click)=" getDogImage()">New Dog!</ion-button>
+      </ion-item>
+    </ion-col>
+    <ion-col size="4">
+      <ion-item>
+        <ion-button expand="block" disabled={{buttondisabled}} (click)=" saveDogImage()">Save Dog!</ion-button>
+      </ion-item>
+    </ion-col>
+    <ion-col size="4">
+      <ion-item>
+        <ion-button expand="block" (click)=" goToFavourites()"> My Favourites</ion-button>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
 
   <div class="box large">
     <img [src]='path'>
