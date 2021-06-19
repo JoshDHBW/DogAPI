@@ -1,20 +1,45 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+<ion-header>
+  <ion-toolbar class="my-background">
+    <ion-row nowrap class="vertical-align-content">
+
+      <ion-col size="10">
+        <ion-title class="my-title">
+          DOG-API
+        </ion-title>
+    </ion-col>
+    <ion-col size="2">
+      <ion-buttons>
+        <ion-button (click)="presentHelp()">
+          <ion-icon name="help-circle-outline"></ion-icon>
+          </ion-button>
+          </ion-buttons>
+    </ion-col>
+    </ion-row>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-item>
+    <ion-segment (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="friends">
+        <ion-label>Random</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="enemies">
+        <ion-label>Specific</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+    <ion-label>Hunderasse</ion-label>
+    <ion-select *ngIf="specific_breed" [(ngModel)]="place" (ionChange)="breedselected()">
+      <ion-select-option *ngFor="let breed of allbreednames" >{{breed}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-button expand="block" (click)="berechnenClicked()">Berechnen!</ion-button>
+  </ion-item>
 
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <ion-img src="{{img}}">
+
+    </ion-img>
   </div>
 </ion-content>
