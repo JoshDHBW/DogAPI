@@ -24,6 +24,7 @@ export class HomePage {
     private navController: NavController) {
     this.auswahl = "random";
     	this.initAllBreeds();
+      this.getDogImage();
   }
   auswahl;
   baseURL: string = "https://dog.ceo/api/";
@@ -69,6 +70,7 @@ export class HomePage {
     this.loading;
     this.loading = true;
     this.errorMessage = "";
+    this.buttondisabled = false;
     if(this.specific_breed){
       this.getSpecificDog(this.place)
       .subscribe(
@@ -159,7 +161,7 @@ saveDogImage(){
     this.zeigeToast("Doggo wurde gespeichert!")
 }
 goToFavourites(){
-  this.router.navigate(["ergebnis"])
+  this.router.navigate(["list"])
 }
 
 async zeigeToast(nachricht: string) {
