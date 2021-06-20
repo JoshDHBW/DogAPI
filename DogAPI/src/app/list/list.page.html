@@ -20,7 +20,7 @@
 </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="content">
   <ion-button expand="block"  (click)="presentAlertConfirm($event,item, true)"> <p>Delete all Doggos</p></ion-button>
   <ion-list class="custom-list">
     <ion-item-sliding *ngFor="let item of itemsPromise" class="my-background">
@@ -44,6 +44,14 @@
   <ion-footer *ngIf="item.bool">
     <ion-item>
       <ion-button class="loeschen" expand="block"  (click)="presentAlertConfirm($event, item, false)">Delete Doggo.</ion-button>
+
+      <share-buttons [theme]="'default'"
+      [include]="['facebook','twitter','telegram','whatsapp','email','print','copy']"
+      [show]="5"
+      [size]="-4"
+      url="'{{item.url}}'"
+      [autoSetMeta]="false"
+     ></share-buttons>
     </ion-item>
   </ion-footer>
         </ion-card>

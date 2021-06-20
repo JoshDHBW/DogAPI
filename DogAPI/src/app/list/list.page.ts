@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {StorageService, Item} from "../services/storage.service";
 import {Router} from "@angular/router";
 import { ToastController, AlertController, NavController } from '@ionic/angular';
+import { faFacebookSquare } from '@fortawesome/free-brands-svg-icons/faFacebookSquare';
+import { faTwitterSquare } from '@fortawesome/free-brands-svg-icons/faTwitterSquare';
+import { faPinterest } from '@fortawesome/free-brands-svg-icons/faPinterest';
+
 
 @Component({
   selector: 'app-list',
@@ -9,7 +13,9 @@ import { ToastController, AlertController, NavController } from '@ionic/angular'
   styleUrls: ['./list.page.scss'],
 })
 export class ListPage implements OnInit {
-
+  fbIcon = faFacebookSquare;
+  pinIcon = faPinterest;
+  tweetIcon = faTwitterSquare;
   private anzahlBerechnungenPromise : any;
   private itemsPromise: any;
   constructor(private router: Router,

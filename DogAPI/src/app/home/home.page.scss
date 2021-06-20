@@ -52,3 +52,16 @@ img{
 #container a {
   text-decoration: none;
 }
+ion-content.background{
+  --background: rgba(255, 226, 146, 0.781);
+}
+.bg-boxen {
+  --background: rgba(206, 162, 97, 0.781);
+    --width: 100%;
+}
+.bg-buttons {
+  --background: rgba(196, 196, 196, 0.781);
+}
+.bg-transparent{
+  --background: transparent;
+}

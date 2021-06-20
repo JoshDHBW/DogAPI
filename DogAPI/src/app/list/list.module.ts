@@ -8,12 +8,15 @@ import { ListPageRoutingModule } from './list-routing.module';
 
 import { ListPage } from './list.page';
 
+import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ListPageRoutingModule
+    ListPageRoutingModule,
+    ShareButtonsModule
   ],
   declarations: [ListPage]
 })
