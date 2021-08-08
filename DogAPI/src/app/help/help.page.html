@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar class="bg-boxen">
+    <ion-row nowrap class="vertical-align-content">
+      <ion-col size="2">
+        <ion-back-button defaultHref="home"></ion-back-button> 
+      </ion-col>
+      <ion-col size="8">
+        <ion-title class="my-title">
+          Help-Page
+        </ion-title>
+    </ion-col>
+    <ion-col size="2">
+      <ion-icon name="paw-outline"></ion-icon>
+    </ion-col>
+    </ion-row>
+</ion-toolbar>
+</ion-header>
+<ion-content   class="background">
+  <ion-item  class="bg-transparent ion-text-center" >
+    <ion-label> 
+      Frequently Asked Questions
+    </ion-label>
+  </ion-item>
+  <ion-list class="custom-list">
+    <ion-item-sliding color="transparent" *ngFor="let faq of FAQS" >
+      <ion-item class="background">
+        <ion-card class="bg-boxen2" button="true" (click)="faq.bool = !faq.bool">
+          <ion-row class="background">
+            <ion-col >
+              <div class="background" text-align="center">
+                <h6>{{faq.question}}</h6>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row class="background">
+            <ion-col>
+              <div *ngIf="faq.bool" text-align="center">
+                <h6>{{faq.answer}}</h6>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-item>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-item  class="bg-transparent" >
+    <ion-label class="ion-text-wrap ion-text-center" > 
+      All credits from the dog pictures belong to the corresponding submitters on <a href="https://dog.ceo/dog-api/">DOG-API</a>
+    </ion-label>
+  </ion-item>
+</ion-content>

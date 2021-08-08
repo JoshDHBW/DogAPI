@@ -1,10 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import {StorageService, Item} from "../services/storage.service";
 import {Router} from "@angular/router";
 import { ToastController, AlertController, NavController } from '@ionic/angular';
-import { faFacebookSquare } from '@fortawesome/free-brands-svg-icons/faFacebookSquare';
-import { faTwitterSquare } from '@fortawesome/free-brands-svg-icons/faTwitterSquare';
-import { faPinterest } from '@fortawesome/free-brands-svg-icons/faPinterest';
 
 
 @Component({
@@ -12,12 +9,9 @@ import { faPinterest } from '@fortawesome/free-brands-svg-icons/faPinterest';
   templateUrl: './list.page.html',
   styleUrls: ['./list.page.scss'],
 })
-export class ListPage implements OnInit {
-  fbIcon = faFacebookSquare;
-  pinIcon = faPinterest;
-  tweetIcon = faTwitterSquare;
-  private anzahlBerechnungenPromise : any;
-  private itemsPromise: any;
+export class ListPage {
+  anzahlItemsPromise : any;  //Anzahl
+  itemsPromise: any;
   constructor(private router: Router,
     private storageService: StorageService,
     private toastController: ToastController,
@@ -28,37 +22,38 @@ export class ListPage implements OnInit {
 
       this.itemsPromise = promiseResolved.reverse();
       try{
-        this.anzahlBerechnungenPromise = promiseResolved.length
+        this.anzahlItemsPromise = promiseResolved.length
       }catch{
         console.log("meh");
-        this.anzahlBerechnungenPromise=0;
+        this.anzahlItemsPromise=0;
       }
     });
   }
 
-  ngOnInit() {
-  }
-
+  //Lösche bestimmtes Item aus der Favoriteliste
   async deleteItem(item: Item){
     await this.storageService.deleteItem(item.id).then(item => {
       this.zeigeToast("Item removed");
       this.loadItems();
-      this.anzahlBerechnungenPromise = this.anzahlBerechnungenPromise-1
+      this.anzahlItemsPromise = this.anzahlItemsPromise-1
     })
   }
+  //Lösche alle Items aus der Favoriteliste
   async deleteAllItems(){
     await this.storageService.deleteAllItems().then(item => {
       this.zeigeToast("Item removed");
       this.loadItems();
-      this.anzahlBerechnungenPromise = 0;
+      this.anzahlItemsPromise = 0;
     })
   }
+  //Lade Items in die itemsPromise Variable
   loadItems() {
     this.storageService.getItems().then(items => {
       this.itemsPromise = items;
       console.log("itemarray wurde geladen.");
     })
   }
+  //Generische Toast Funktion
   async zeigeToast(nachricht: string) {
 
     const ANZEIGEDAUER_SEKUNDEN = 2;
@@ -71,14 +66,23 @@ export class ListPage implements OnInit {
 
     await toast.present();
   }
-  async presentAlertConfirm(event, item: Item, alle: Boolean) {
+  //Sicherheitsabfrage für Löschfunktion
+  async presentAlertConfirm(event, item: Item | null, alle: Boolean) {
     event.stopPropagation();
+    let xyz = "";
+   //Check ob alle gelöscht werden oder nur einer, String wird dementsprechend angepasst
+    if(alle){
+      xyz = "all Doggos"
+    }else{
+      xyz = "this "+item.breed+ " Doggo"
+    }
+
     const alert = await this.alertController.create({
-      header: 'Ladezeit(en) löschen?',
-      message: '<strong> Achtung: Diese Aktion lässt sich nicht rückgängig machen.</strong>',
+      header: 'Delete '+xyz+'?',
+      message: '<strong> Warning: You can´t revive '+ xyz + ' from deletion.</strong>',
       buttons: [
         {
-          text: 'Bestätigen',
+          text: 'Confirm',
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
@@ -90,17 +94,19 @@ export class ListPage implements OnInit {
             }
           }
         }, {
-          text: 'Abbrechen',
+          text: 'Cancel',
           handler: (blah) => {
             console.log('Confirm Cancel: blah');
           }
         }
       ]
     });
-
     await alert.present();
   }
-  showDetails(item: Item){
-    
+  presentHelp(){
+    this.router.navigate(["help"])
+  }
+  stopPropagation(event){
+    event.stopPropagation();
   }
 }

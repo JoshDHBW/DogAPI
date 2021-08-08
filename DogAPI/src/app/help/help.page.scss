@@ -1,10 +1,10 @@
 ion-card{
-    display: flex;
-    flex-direction: column;
-    width: 100% !important;
-    border-radius: 15px;
-    border: 3px solid rgba(196, 196, 196, 0.781);;
-  }
+  display: flex;
+  flex-direction: column;
+  width: 100% !important;
+  border-radius: 15px;
+  border: 3px solid rgba(196, 196, 196, 0.781);;
+}
   ion-img{
     max-width:auto;
     max-height: auto;
@@ -18,9 +18,7 @@ ion-card{
     position: absolute;
     top: 30%;
   }
-  button{
-    background-color: transparent;
-  }
+
   ion-buttons{
     float:left;
     align-items: center;
@@ -54,7 +52,7 @@ ion-card{
   }
   .box{
     width: 100%;   
-    border: 3px solid rgba(196, 196, 196, 0.781);
+    border: 5px solid black;
     text-align: center;
     margin: auto;
     max-width:100%;
@@ -81,10 +79,7 @@ ion-card{
   .bg-boxen2 {
     --background: rgba(228, 180, 109, 0.781);
       --width: 100%;
-  }
-  .bg-boxen3 {
-    --background: rgba(161, 255, 200, 0.781);
-      --width: 100%;
+      color:black;
   }
   .bg-buttons {
     --background: rgba(196, 196, 196, 0.781);
@@ -98,9 +93,9 @@ ion-card{
     align-items: center;
     justify-content: center;
     }
-    ion-text-wrap{
-      text-align:center;
+    .background{
+       --background: rgba(255, 226, 146, 0.781);
     }
-    ion-content.background{
-      --background: rgba(255, 226, 146, 0.781);
-    }
+    .custom-list {
+        background: inherit;
+      }

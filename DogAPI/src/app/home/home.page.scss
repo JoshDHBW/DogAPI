@@ -26,7 +26,7 @@ img{
 }
 .box{
   width: 100%;   
-  border: 5px solid black;
+  border: 3px solid rgba(196, 196, 196, 0.781);
   text-align: center;
   margin: auto;
   max-width:100%;
@@ -55,13 +55,21 @@ img{
 ion-content.background{
   --background: rgba(255, 226, 146, 0.781);
 }
+ion-row{
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
 .bg-boxen {
   --background: rgba(206, 162, 97, 0.781);
-    --width: 100%;
+  --width: 100%;
 }
 .bg-buttons {
   --background: rgba(196, 196, 196, 0.781);
+  --color:black;
 }
 .bg-transparent{
   --background: transparent;
+  --width: 100%;
 }

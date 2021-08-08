@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar class="my-background">
+  <ion-toolbar class="bg-boxen">
     <ion-row nowrap class="vertical-align-content">
       <ion-col size="2">
         <ion-back-button defaultHref="home"></ion-back-button> 
@@ -20,13 +20,13 @@
 </ion-toolbar>
 </ion-header>
 
-<ion-content class="content">
-  <ion-button expand="block"  (click)="presentAlertConfirm($event,item, true)"> <p>Delete all Doggos</p></ion-button>
+<ion-content  class="background">
+  <ion-button class="bg-buttons" expand="block"  (click)="presentAlertConfirm($event,null,true)"> <p>Delete all Doggos</p></ion-button>
   <ion-list class="custom-list">
-    <ion-item-sliding *ngFor="let item of itemsPromise" class="my-background">
-      <ion-item class="my-background">
-        <ion-card button="true" (click)="item.bool = !item.bool">
-          <ion-item>
+    <ion-item-sliding *ngFor="let item of itemsPromise" class="bg-transparent">
+      <ion-item class="bg-transparent">
+        <ion-card class="bg-boxen2" button="true" (click)="item.bool = !item.bool">
+          <ion-item class="bg-transparent">
             <ion-avatar slot="start">
               <ion-img src= {{item.url}}> </ion-img>
             </ion-avatar>
@@ -35,24 +35,23 @@
               <p>{{item.datum}}</p>
             </ion-label>
           </ion-item>
-          <ion-item *ngIf="item.bool">
+          <ion-item *ngIf="item.bool" class="bg-transparent">
 
               <div class="box large">
               <img src="{{item.url}}">
             </div>
           </ion-item>
-  <ion-footer *ngIf="item.bool">
-    <ion-item>
-      <ion-button class="loeschen" expand="block"  (click)="presentAlertConfirm($event, item, false)">Delete Doggo.</ion-button>
-
-      <share-buttons [theme]="'default'"
-      [include]="['facebook','twitter','telegram','whatsapp','email','print','copy']"
-      [show]="5"
-      [size]="-4"
-      url="'{{item.url}}'"
-      [autoSetMeta]="false"
-     ></share-buttons>
-    </ion-item>
+  <ion-footer class="bg-transparent" *ngIf="item.bool" >
+        <div class="bg-transparent">
+          <ion-button class="bg-buttons" expand="block"  (click)="presentAlertConfirm($event, item, false)">Delete Doggo</ion-button>
+        </div>
+        <share-buttons class="bg-transparent" [theme]="'default'" (click)="stopPropagation($event)"
+        [include]="['twitter','telegram','whatsapp','print','email','copy']"
+        [show]="6"
+        [size]="-5"
+        url="'{{item.url}}'"
+        [autoSetMeta]="false"
+       ></share-buttons>
   </ion-footer>
         </ion-card>
       </ion-item>
